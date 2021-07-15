@@ -1,12 +1,5 @@
-"""
-View more, visit my tutorial page: https://mofanpy.com/tutorials/
-My Youtube Channel: https://www.youtube.com/user/MorvanZhou
-
-Dependencies:
-torch: 0.4
-numpy
-matplotlib
-"""
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"]  =  "TRUE"
 import torch
 import torch.nn as nn
 import numpy as np
@@ -16,7 +9,7 @@ import matplotlib.pyplot as plt
 # np.random.seed(1)
 
 # Hyper Parameters
-BATCH_SIZE = 2
+BATCH_SIZE = 64
 LR_G = 0.0001           # learning rate for generator
 LR_D = 0.0001           # learning rate for discriminator
 N_IDEAS = 5             # think of this as number of ideas for generating an art work (Generator)
@@ -54,7 +47,7 @@ opt_G = torch.optim.Adam(G.parameters(), lr=LR_G)
 
 plt.ion()   # something about continuous plotting
 
-for step in range(9000):
+for step in range(10000):
     artist_paintings = artist_works()  # real painting from artist
     G_ideas = torch.randn(BATCH_SIZE, N_IDEAS, requires_grad=True)  # random ideas\n
     G_paintings = G(G_ideas)                    # fake painting from G (random ideas)
